@@ -1,0 +1,384 @@
+﻿<Window x:Class="WesternSydneyMedicalPractice.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WesternSydneyMedicalPractice"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="525" Width="800" WindowStartupLocation="CenterScreen">
+    <Grid x:Name="txtPatientId">
+        <TabControl x:Name="tabcontrolMain" SelectionChanged="tabcontrolMain_SelectionChanged">
+            <!--#region     Practitioner Tab-->
+            <TabItem x:Name="tabItemPractitioner" Header="Practitioners">
+                <Grid Background="AliceBlue">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="3*"/>
+                        <RowDefinition Height="3*"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="106*"/>
+                        <ColumnDefinition Width="209*"/>
+                        <ColumnDefinition Width="473*"/>
+                    </Grid.ColumnDefinitions>
+                    <ListView x:Name="lvPractitioners" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" Background="AliceBlue" SelectionChanged="lvPractitioners_SelectionChanged" Margin="0,0,23,0">
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn Header="Practitioner ID" DisplayMemberBinding="{Binding Path= Practitioner_ID}"/>
+                                <GridViewColumn Header="Type" DisplayMemberBinding="{Binding Path= PractnrTypeName_Ref}"/>
+                                <GridViewColumn Header="First name" DisplayMemberBinding="{Binding Path= FirstName}"/>
+                                <GridViewColumn Header="LastName" DisplayMemberBinding="{Binding Path= LastName}"/>
+                                <GridViewColumn Header="Street" DisplayMemberBinding="{Binding Path= Street}"/>
+                                <GridViewColumn Header="Suburb" DisplayMemberBinding="{Binding Path= Suburb}"/>
+                                <GridViewColumn Header="State" DisplayMemberBinding="{Binding Path= State}"/>
+                                <GridViewColumn Header="PostCode" DisplayMemberBinding="{Binding Path= PostCode}"/>
+                                <GridViewColumn Header="Mobile" DisplayMemberBinding="{Binding Path= Mobile}"/>
+                                <GridViewColumn Header="HomePhone" DisplayMemberBinding="{Binding Path= HomePhone}"/>
+                                <GridViewColumn Header="Registration No." DisplayMemberBinding="{Binding Path= RegistrationNumber}"/>
+                                <!--#region Monday-sunday Tab-->
+                                <GridViewColumn Header="Monday" Width="60">
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <CheckBox IsChecked="{Binding Path= Monday}" IsEnabled="False"></CheckBox>
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+                                <GridViewColumn Header="Thuesday" Width="60">
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <CheckBox IsChecked="{Binding Path= Thuesday}" IsEnabled="False"></CheckBox>
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+                                <GridViewColumn Header="Wednesday" Width="60">
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <CheckBox IsChecked="{Binding Path= Wednesday}" IsEnabled="False"></CheckBox>
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+                                <GridViewColumn Header="Thursday" Width="60">
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <CheckBox IsChecked="{Binding Path= Thursday}" IsEnabled="False"></CheckBox>
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+                                <GridViewColumn Header="Friday" Width="60">
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <CheckBox IsChecked="{Binding Path= Friday}" IsEnabled="False"></CheckBox>
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+                                <GridViewColumn Header="Saturday" Width="60">
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <CheckBox IsChecked="{Binding Path= Saturday}" IsEnabled="False"></CheckBox>
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+                                <GridViewColumn Header="Sunday" Width="60">
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <CheckBox IsChecked="{Binding Path= Sunday}" IsEnabled="False"></CheckBox>
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+                                <!--#endregion Monday-sunday Tab-->
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                    <Grid Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Margin="0,0,0.2,0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="2*"/>
+                        </Grid.ColumnDefinitions>
+                        <Button x:Name="btnFirstRecord" Content="|&lt;" Grid.Row="0" Grid.Column="0" Margin="4,4,54,4" Width="35" Click="btnFirstRecord_Click"/>
+                        <Button x:Name="btnPreviousRecord" Content="&lt;" Grid.Row="0" Grid.Column="1" Margin="4 4 152 4" Width="35" Click="btnPreviousRecord_Click"/>
+                        <Button x:Name="btnNextRecord" Content="&gt;" Grid.Row="0" Grid.Column="1" Margin="4 4 50 4" Width="35" Click="btnNextRecord_Click"/>
+                        <Button x:Name="btnLastRecord" Content="&gt;|" Grid.Row="0" Grid.Column="1" Margin="4 4 -100 4" Width="35" Click="btnLastRecord_Click"/>
+
+                        <Label Content="Practitioner ID" Margin="4,4,4,4" Grid.Row="1" Grid.Column="0"/>
+                        <TextBox x:Name="txtPractitioner_ID" Background="White"   Margin="4,4,4,4" Grid.Row="1" Grid.Column="1" Width="80" TextWrapping="Wrap" DataContext="{Binding SelectedItem, ElementName=lvPractitioners}" Text="{Binding Practitioner_ID, Mode=OneWay}"/>
+
+                        <Label Content="Type" Margin="4,4,4,4" Grid.Row="2" Grid.Column="0"/>
+                        <ComboBox x:Name="cboPracType" Margin="4,4,4,4" Grid.Row="2" Grid.Column="1" DataContext="{Binding SelectedItem, ElementName=lvPractitioners}" Text="{Binding PractnrTypeName_Ref, Mode=OneWay}" SelectionChanged="cboPracType_SelectionChanged">
+                            <!--TODO This should be regactored so that it's coming from the Database-->
+                            <ComboBoxItem>Doctor GP</ComboBoxItem>
+                            <ComboBoxItem>Nurse</ComboBoxItem>
+                        </ComboBox>
+
+                        <Label Content="First Name" Margin="4,4,4,4" Grid.Row="3" Grid.Column="0" />
+                        <TextBox x:Name="txtPracFirstName" Background="White" Margin="4,4,4,4" Grid.Row="3" Grid.Column="3" DataContext="{Binding SelectedItem, ElementName=lvPractitioners}" Text="{Binding FirstName, Mode=OneWay}"  />
+
+                        <Label Content="Last Name" Margin="4,4,4,4" Grid.Row="4" Grid.Column="0" />
+                        <TextBox x:Name="txtPracLastName" Margin="4,4,4,4" Grid.Row="4" Grid.Column="1" DataContext="{Binding SelectedItem, ElementName=lvPractitioners}" Text="{Binding LastName, Mode=OneWay}" />
+
+                        <Label Content="Street" Margin="4,4,4,4" Grid.Row="5" Grid.Column="0" />
+                        <TextBox x:Name="txtPracStreet" Margin="4,4,4,4" Grid.Row="5" Grid.Column="1" DataContext="{Binding SelectedItem, ElementName=lvPractitioners}" Text="{Binding Street, Mode=OneWay}" />
+                    </Grid>
+
+                    <Grid Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Margin="209,0,0,0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="3*" />
+                            <ColumnDefinition Width="4*" />
+                            <ColumnDefinition Width="4*" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+                        <Label Content="Suburb" Margin="4,4,4,4" Grid.Row="0" Grid.Column="0" />
+                        <TextBox x:Name="txtPracSuburb" Background="White" Margin="4,4,4,4" Grid.Row="0" Grid.Column="1" DataContext="{Binding SelectedItem, ElementName=lvPractitioners}" Text="{Binding Suburb, Mode=OneWay}"  />
+
+                        <Label Content="State" Margin="4,4,4,4" Grid.Row="1" Grid.Column="0" />
+                        <ComboBox x:Name="comPracState" Margin="4,4,4,4" Grid.Row="1" Grid.Column="1" DataContext="{Binding SelectedItem, ElementName=lvPractitioners}" Text="{Binding State, Mode=OneWay}" SelectionChanged="txtState_SelectionChanged">
+                            <!--TODO This should be regactored so that it's coming from the Database-->
+                            <ComboBoxItem>NSW</ComboBoxItem>
+                            <ComboBoxItem>ACT</ComboBoxItem>
+                            <ComboBoxItem>VIC</ComboBoxItem>
+                            <ComboBoxItem>QLD</ComboBoxItem>
+                            <ComboBoxItem>NT</ComboBoxItem>
+                            <ComboBoxItem>SA</ComboBoxItem>
+                            <ComboBoxItem>WA</ComboBoxItem>
+                            <ComboBoxItem>TAS</ComboBoxItem>
+                        </ComboBox>
+
+                        <Label Content="PostCode" Margin="4,4,4,4" Grid.Row="2" Grid.Column="0" />
+                        <TextBox x:Name="txtPracPostCode" Background="White" Margin="4,4,4,4" Grid.Row="2" Grid.Column="1" DataContext="{Binding SelectedItem, ElementName=lvPractitioners}" Text="{Binding PostCode, Mode=OneWay}"  />
+
+                        <Label Content="Mobile" Margin="4,4,4,4" Grid.Row="3" Grid.Column="0" />
+                        <TextBox x:Name="txtPracMobile" Background="White" Margin="4,4,4,4" Grid.Row="3" Grid.Column="1" DataContext="{Binding SelectedItem, ElementName=lvPractitioners}" Text="{Binding Mobile, Mode=OneWay}"  />
+
+                        <Label Content="HomePhone" Margin="4,4,4,4" Grid.Row="4" Grid.Column="0" />
+                        <TextBox x:Name="txtPracHomePhone" Background="White" Margin="4,4,4,4" Grid.Row="4" Grid.Column="1" DataContext="{Binding SelectedItem, ElementName=lvPractitioners}" Text="{Binding HomePhone, Mode=OneWay}"  />
+
+                        <Label Content="Registration NO." Margin="4,4,4,4" Grid.Row="5" Grid.Column="0" />
+                        <TextBox x:Name="txtPracRegistrationNumber" Background="White" Margin="4,4,4,4" Grid.Row="5" Grid.Column="1" DataContext="{Binding SelectedItem, ElementName=lvPractitioners}" Text="{Binding RegistrationNumber, Mode=OneWay}"  />
+
+
+                        <Label Content="Availability" Margin="4,4,4,4" Grid.Row="0" Grid.Column="2" />
+                        <CheckBox x:Name="chkBxMonday" Content="Monday" Grid.Row="1" Grid.Column="2" Margin="40,4,4,4" DataContext="{Binding SelectedItem, ElementName=lvPractitioners}" IsChecked="{Binding Monday}"/>
+                        <CheckBox x:Name="chkBxTuesday" Content="Tuesday" Grid.Row="2" Grid.Column="2" Margin="40,4,4,4" DataContext="{Binding SelectedItem, ElementName=lvPractitioners}" IsChecked="{Binding Tuesday}"/>
+                        <CheckBox x:Name="chkBxWednesday" Content="Wednesday" Grid.Row="3" Grid.Column="2" Margin="40,4,4,4" DataContext="{Binding SelectedItem, ElementName=lvPractitioners}" IsChecked="{Binding Wednesday}"/>
+                        <CheckBox x:Name="chkBxThursday" Content="Thursday" Grid.Row="4" Grid.Column="2" Margin="40,4,4,4" DataContext="{Binding SelectedItem, ElementName=lvPractitioners}" IsChecked="{Binding Thursday}"/>
+                        <CheckBox x:Name="chkBxFriday" Content="Friday" Grid.Row="5" Grid.Column="2" Margin="40,4,4,4" DataContext="{Binding SelectedItem, ElementName=lvPractitioners}" IsChecked="{Binding Friday}"/>
+
+
+
+                    </Grid>
+
+                    <Grid Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Margin="0,0,0.2,0.2">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Button x:Name="btnAddPractitioner" Content="Add new" Grid.Column="0" Width="80" Height="30" Click="btnAddPractitioner_Click"/>
+                        <Button x:Name="btnUpdatePractitioner" Content="Update" Grid.Column="1" Width="80" Height="30" Click="btnUpdatePractitioner_Click"/>
+                    </Grid>
+
+                    <Grid Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" Margin="209,0,0,0.2">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="3*"/>
+                            <ColumnDefinition Width="4*"/>
+                            <ColumnDefinition Width="4*"/>
+                        </Grid.ColumnDefinitions>
+                        <Button x:Name="btnDeletePractitioner" Content="Delete" Grid.Column="0" Width="80" Height="30" Click="btnDeletePractitioner_Click"/>
+                        <Button x:Name="btnCancelPractitioner" Content="Cancel" Grid.Column="1" Width="80" Height="30" Click="btnCancelPractitioner_Click"/>
+
+                        <Grid Grid.Column="2">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="*" />
+                            </Grid.RowDefinitions>
+                            <CheckBox x:Name="chkBxSaturday" Content="Saturday" Grid.Row="0"  Margin="40,4,4,4" DataContext="{Binding SelectedItem, ElementName=lvPractitioners}" IsChecked="{Binding Saturday}"/>
+                            <CheckBox x:Name="chkBxSunday" Content="Sunday" Grid.Row="1" Margin="40,4,4,4" DataContext="{Binding SelectedItem, ElementName=lvPractitioners}" IsChecked="{Binding Sunday}"/>
+                        </Grid>
+                    </Grid>
+                </Grid>
+            </TabItem>
+            <!--#endregion  Practitioner Tab-->
+
+            <!--#region     Patient Tab-->
+            <TabItem x:Name="tabItemPatient" Header="Patients">
+                <Grid Background="SkyBlue">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="3*"/>
+                        <RowDefinition Height="3*"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="2*"/>
+                        <ColumnDefinition Width="3*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <ListView x:Name="lvPatients" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Background="SkyBlue" SelectionChanged="lvPatients_SelectionChanged">
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn Header="Patient Id" DisplayMemberBinding="{Binding Path=Patient_ID}"/>
+                                <GridViewColumn Header="Gender" DisplayMemberBinding="{Binding Path=Gender}"/>
+                                <GridViewColumn Header="Date Of Birth" DisplayMemberBinding="{Binding Path=DateOfBirth, StringFormat=dd/MM/yyyy}"/>
+                                <GridViewColumn Header="First Name" DisplayMemberBinding="{Binding Path=FirstName}"/>
+                                <GridViewColumn Header="Last Name" DisplayMemberBinding="{Binding Path=LastName}"/>
+                                <GridViewColumn Header="Street" DisplayMemberBinding="{Binding Path=Street}"/>
+                                <GridViewColumn Header="Suburb" DisplayMemberBinding="{Binding Path=Suburb}"/>
+                                <GridViewColumn Header="State" DisplayMemberBinding="{Binding Path=State}"/>
+                                <GridViewColumn Header="PostCode" DisplayMemberBinding="{Binding Path=PostCode}"/>
+                                <GridViewColumn Header="Home Phone" DisplayMemberBinding="{Binding Path=HomePhone}"/>
+                                <GridViewColumn Header="Mobile Phone" DisplayMemberBinding="{Binding Path=Mobile}"/>
+                                <GridViewColumn Header="Medicare Number" DisplayMemberBinding="{Binding Path=MedicalNumber}"/>
+                                <GridViewColumn Header="Patient Notes" DisplayMemberBinding="{Binding Path=PatientNote}"/>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+
+                    <Grid Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="1">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="2*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Button x:Name="btnPatFirstRecord" Content="|&lt;" Grid.Row="0" Width="35" Margin="4,4,54,4" Click="btnPatFirstRecord_Click"/>
+                        <Button x:Name="btnPatPreviousRecord" Content="&lt;" Grid.Row="0" Grid.Column="1" Width="35" Margin="5,4,152,4" Click="btnPatPreviousRecord_Click"/>
+                        <Button x:Name="btnPatNextRecord" Content="&gt;" Grid.Row="0" Grid.Column="1" Width="35" Margin="61,4,96,4" Click="btnPatNextRecord_Click"/>
+                        <Button x:Name="btnPatLastRecord" Content=">|" Grid.Row="0" Grid.Column="1" Width="35" Margin="152,4,5,4" Click="btnPatLastRecord_Click"/>
+                        <Label Content="Patient Id:" Grid.Row="1" Grid.Column="0" Margin="4,4,4,4"/>
+                        <TextBox x:Name="txtPatient_ID" Grid.Row="1" Grid.Column="1" Margin="4,4,4,4" IsEnabled="False" DataContext="{Binding SelectedItem, ElementName=lvPatients}" Text="{Binding Patient_ID, Mode=OneWay}"/>
+                        <Label Content="Gender:" Grid.Row="2" Grid.Column="0" Margin="4,4,4,4"/>
+                        <ComboBox x:Name="cboGender" Grid.Row="2" Grid.Column="1" Margin="4,4,4,4" DataContext="{Binding SelectedItem, ElementName=lvPatients}" Text="{Binding Gender, Mode=OneWay}" SelectionChanged="cboGender_SelectionChanged">
+                            <ComboBoxItem>M</ComboBoxItem>
+                            <ComboBoxItem>F</ComboBoxItem>
+                        </ComboBox>
+                        <Label Content="First Name:" Grid.Row="3" Grid.Column="0" Margin="4,4,4,4"/>
+                        <TextBox x:Name="txtPatFirstName" Grid.Row="3" Grid.Column="1" Margin="4,4,4,4" DataContext="{Binding SelectedItem, ElementName=lvPatients}" Text="{Binding FirstName, Mode=OneWay}"/>
+                        <Label Content="Last Name:" Grid.Row="4" Grid.Column="0" Margin="4,4,4,4"/>
+                        <TextBox x:Name="txtPatLastName" Grid.Row="4" Grid.Column="1" Margin="4,4,4,4" DataContext="{Binding SelectedItem, ElementName=lvPatients}" Text="{Binding LastName, Mode=OneWay}"/>
+                        <Label Content="Street:" Grid.Row="5" Grid.Column="0" Margin="4,4,4,4"/>
+                        <TextBox x:Name="txtPatStreet" Grid.Row="5" Grid.Column="1" Margin="4,4,4,4" DataContext="{Binding SelectedItem, ElementName=lvPatients}" Text="{Binding Street, Mode=OneWay}"/>
+                    </Grid>
+
+                    <Grid Grid.Row="1" Grid.Column="1" Margin="1">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="101*"/>
+                            <ColumnDefinition Width="154*"/>
+                            <ColumnDefinition Width="202*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Label Content="Suburb:" Grid.Row="0" Grid.Column="0" Margin="4,4,4,4"/>
+                        <TextBox x:Name="txtPatSuburb" Grid.Row="0" Grid.Column="1" Margin="4,4,4,4" DataContext="{Binding SelectedItem, ElementName=lvPatients}" Text="{Binding Suburb, Mode=OneWay}"/>
+                        <Label Content="State:" Grid.Row="1" Grid.Column="0" Margin="4,4,4,4"/>
+                        <ComboBox x:Name="cboPatState" Grid.Row="1" Grid.Column="1" Margin="4,4,4,4" DataContext="{Binding SelectedItem, ElementName=lvPatients}" Text="{Binding State, Mode=OneWay}" SelectionChanged="cboPatState_SelectionChanged">
+                            <ComboBoxItem>ACT</ComboBoxItem>
+                            <ComboBoxItem>NSW</ComboBoxItem>
+                            <ComboBoxItem>VIC</ComboBoxItem>
+                            <ComboBoxItem>QLD</ComboBoxItem>
+                            <ComboBoxItem>NT</ComboBoxItem>
+                            <ComboBoxItem>SA</ComboBoxItem>
+                            <ComboBoxItem>WA</ComboBoxItem>
+                            <ComboBoxItem>TAS</ComboBoxItem>
+                        </ComboBox>
+                        <Label Content="Post Code:" Grid.Row="2" Grid.Column="0" Margin="4,4,4,4"/>
+                        <TextBox x:Name="txtPatPostCode" MaxLength="4" Grid.Row="2" Grid.Column="1" Margin="4,4,4,4" DataContext="{Binding SelectedItem, ElementName=lvPatients}" Text="{Binding PostCode, Mode=OneWay}"/>
+                        <Label Content="Home Ph:" Grid.Row="3" Grid.Column="0" Margin="4,4,4,4"/>
+                        <TextBox x:Name="txtPatHomePhone" MaxLength="10" Grid.Row="3" Grid.Column="1" Margin="4,4,4,4" DataContext="{Binding SelectedItem, ElementName=lvPatients}" Text="{Binding HomePhone, Mode=OneWay}"/>
+                        <Label Content="Mobile Ph:" Grid.Row="4" Grid.Column="0" Margin="4,4,4,4"/>
+                        <TextBox x:Name="txtPatMobilePhone" MaxLength="10" Grid.Row="4" Grid.Column="1" Margin="4,4,4,4" DataContext="{Binding SelectedItem, ElementName=lvPatients}" Text="{Binding Mobile, Mode=OneWay}"/>
+                        <Label Content="Medicare No.:" Grid.Row="5" Grid.Column="0" Margin="4,4,4,4"/>
+                        <TextBox x:Name="txtPatMedicareNumber" MaxLength="15" Grid.Row="5" Grid.Column="1" Margin="4,4,4,4" DataContext="{Binding SelectedItem, ElementName=lvPatients}" Text="{Binding MedicalNumber, Mode=OneWay}"/>
+                        <Label Content="Date Of Birth:" Grid.Row="0" Grid.Column="2" Margin="4,4,4,4"/>
+                        <DatePicker x:Name="dtpPatDateOfBirth" Grid.Row="0" Grid.Column="2" Width="110" Margin="88,4,4,4" DataContext="{Binding SelectedItem, ElementName=lvPatients}" SelectedDate="{Binding DateOfBirth, Mode=OneWay}"/>
+                        <Label Content="Notes" FontSize="18" VerticalAlignment="Center" Grid.Row="1" Grid.Column="2" Margin="15,0,0,0" Height="33"/>
+                        <TextBox x:Name="txtPatNotes" Grid.Row="2" Grid.RowSpan="4" TextWrapping="Wrap" Grid.Column="2" Margin="20,0,4,4" DataContext="{Binding SelectedItem, ElementName=lvPatients}" Text="{Binding PatientNote, Mode=OneWay}"/>
+                    </Grid>
+
+                    <Grid Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Button x:Name="btnAddNewPatient" Content="Add New" Grid.Row="0" Grid.Column="0" Width="80" Height="30" Click="btnAddNewPatient_Click"/>
+                        <Button x:Name="btnUpdatePatient" Content="Update" Grid.Row="0" Grid.Column="1" Width="80" Height="30" Click="btnUpdatePatient_Click"/>
+                    </Grid>
+
+                    <Grid Grid.Row="2" Grid.Column="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="3*"/>
+                            <ColumnDefinition Width="4*"/>
+                            <ColumnDefinition Width="4*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid Grid.Row="0" Grid.Column="2">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+                        </Grid>
+                        <Button x:Name="btnDeletePatient" Content="Delete" Grid.Row="0" Grid.Column="0" Width="80" Height="30" Click="btnDeletePatient_Click"/>
+                        <Button x:Name="btnCancelPatient" Content="Cancel" IsEnabled="False" Grid.Row="0" Grid.Column="1" Width="80" Height="30" Click="btnCancelPatient_Click"/>
+                        <Button x:Name="btnAppointmentsPatient" Content="Appointments" Grid.Row="0" Grid.Column="2" Width="80" Height="30" Click="btnAppointmentsPatient_Click"/>
+                    </Grid>
+                </Grid>
+            </TabItem>
+            <!--#endregion  Patient Tab-->
+
+            <!--#region     Appointments Tab-->
+            <TabItem x:Name="tabItemAppointment" Header="Appointments">
+                <Grid Background="AliceBlue">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <ListView x:Name="lvAppointmt" Grid.Row="0" Background="SkyBlue" SelectionChanged="lvAppointmt_SelectionChanged">
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn Header="Patient Id" DisplayMemberBinding="{Binding Path=Patient_ID}" />
+                                <GridViewColumn Header="GP FisrtName" DisplayMemberBinding="{Binding Path=PractitionerFisrtName}"/>
+                                <GridViewColumn Header="GP LastName" DisplayMemberBinding="{Binding Path=PractitionerLastName}"/>
+                                <GridViewColumn Header="AppointmentDate" DisplayMemberBinding="{Binding Path=AppointmentDate, StringFormat=dd/MM/yyyy}"/>
+                                <GridViewColumn Header="AppointmentTime" DisplayMemberBinding="{Binding Path=AppointmentTime, StringFormat=dd/MM/yyyy}"/>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                </Grid>
+            </TabItem>
+            <!--#endregion  Appointments Tab-->
+
+            <!--#region     Schedule Tab-->
+            <TabItem x:Name="tabItemSchedule" Header="Schedule">
+
+            </TabItem>
+            <!--#endregion  Schedule Tab-->
+        </TabControl>
+
+    </Grid>
+</Window>
